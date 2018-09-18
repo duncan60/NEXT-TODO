@@ -1,0 +1,30 @@
+{
+    "name": "NEXT-TODO",
+    "version": "1.0.0",
+    "description": "Practice NEXT.js  for React SSR  formwork",
+    "main": "index.js",
+    "scripts": {
+        "dev": "node server.js",
+        "build": "next build",
+        "start": "NODE_ENV=production node server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/duncan60/NEXT-TODO.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/duncan60/NEXT-TODO/issues"
+    },
+    "homepage": "https://github.com/duncan60/NEXT-TODO#readme",
+    "dependencies": {
+        "express": "^4.16.3",
+        "isomorphic-unfetch": "^3.0.0",
+        "next": "^6.1.2",
+        "react": "^16.5.1",
+        "react-dom": "^16.5.1",
+        "todomvc-app-css": "^2.1.2"
+    }
+}
