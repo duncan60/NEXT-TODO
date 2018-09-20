@@ -1,16 +1,19 @@
 import Layout from '../components/Layout';
 import Link from 'next/link';
 import fetch from 'isomorphic-unfetch';
+
 import '../static/style.scss';
 
 const Index = (props) => (
   <Layout>
-    <h1>Batman TV Shows</h1>
+    <h1>My Github Profile</h1>
+    <img style={{ width:'100px'}} src={props.profile.avatar_url}/>
+    <p>{`Name: ${props.profile.name}`}</p>
     <ul>
-      {props.shows.map(({show}) => (
-        <li key={show.id}>
-          <Link as={`/p/${show.id}`} href={`/post?id=${show.id}`}>
-            <a>{show.name}</a>
+      {props.repos.map((repo) => (
+        <li key={repo.id}>
+          <Link as={`/p/${repo.name}`} href={`/post?name=${repo.name}`}>
+            <a>{repo.name}</a>
           </Link>
         </li>
       ))}
@@ -20,13 +23,24 @@ const Index = (props) => (
 
 
 Index.getInitialProps = async function() {
-  // const res = await fetch('https://api.tvmaze.com/search/shows?q=batman');
-  // const data = await res.json();
-
-  // console.log(`Show data fetched. Count: ${data.length}`)
+  let profile = {};
+  let repos = [];
+  const res = await fetch('https://api.github.com/users/duncan60');
+  if (res.status === 200) {
+    profile = await res.json();
+  } else {
+    profile = {
+      name: 'none',
+    }
+  }
+  const res2 = await fetch('https://api.github.com/users/duncan60/repos');
+  if (res2.status === 200) {
+    repos = await res2.json();
+  } 
 
   return {
-    shows: [],
+    profile,
+    repos,
   };
 };
 

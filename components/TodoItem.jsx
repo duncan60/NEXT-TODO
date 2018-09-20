@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 const TodoItem = (props) => {
   return (
     <li className={ props.status }>
@@ -10,7 +12,11 @@ const TodoItem = (props) => {
             props.onComplete(props.id);
           }}
         />
-        <label>{ props.text }</label>
+        <label>
+          <Link as={`/todos/${props.id}`} href={`/todo?id=${props.id}`}>
+            <a>{ props.text }</a>
+          </Link>
+        </label>
         <button
           className="destroy"
           onClick={ () => {

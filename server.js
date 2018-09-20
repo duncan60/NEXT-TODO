@@ -9,8 +9,13 @@ app.prepare()
 .then(() => {
   const server = express()
   
-  server.get('/p/:id', (req, res) => {
-    const actualPage = '/post'
+  server.get('/p/:name', (req, res) => {
+    const actualPage = '/repo'
+    const queryParams = { name: req.params.name } 
+    app.render(req, res, actualPage, queryParams)
+  })
+  server.get('/todos/:id', (req, res) => {
+    const actualPage = '/todo'
     const queryParams = { id: req.params.id } 
     app.render(req, res, actualPage, queryParams)
   })
