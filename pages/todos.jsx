@@ -1,10 +1,18 @@
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Layout from '../components/Layout';
 import TodoItem from '../components/TodoItem';
+import { addTodoItem, clearTodoItem, changeAllItem, completeTodoItem } from '../store';
+
+import '../static/style.scss';
 
 class Todos extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { items: [], text: '' };
+    this.state = { 
+      text: '',
+    };
     this.changeHandler = this.changeHandler.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
   }
@@ -17,43 +25,29 @@ class Todos extends React.Component {
       if (!this.state.text.length) {
         return;
       }
-      const newItem = {
-        text: this.state.text,
-        id: Date.now(),
-        status: 'todo',
-      };
       this.setState(state => ({
-        items: state.items.concat(newItem),
         text: '',
       }));
+      this.props.addTodoItem(this.state.text);
     }
   }
   clearItemHandler = (id) => {
-    const items = this.state.items.filter(item => item.id !== id);
-    this.setState(state => ({
-      items,
-    }));
+    this.props.clearTodoItem(id);
+  }
+  changeAllStatusHandler = () => {
+    this.props.changeAllItem();
   }
   completeItemHandler = (id) => {
-    const items = this.state.items.map(item => 
-      item.id === id ?
-      {
-        ...item,
-        status: item.status === 'completed' ? 'todo' : 'completed',
-      }:
-      item
-    );
-    this.setState(state => ({
-      items,
-    }));
+    this.props.completeTodoItem(id);
   }
   render() {
+    const { todos } = this.props;
     return (
       <Layout>
         <section className="todoapp">
           <header className="header">
             <h1 >todos</h1>
-            <input 
+            <input
               className="new-todo"
               placeholder="What needs to be done?"
               onChange={this.changeHandler}
@@ -62,22 +56,42 @@ class Todos extends React.Component {
             />
             <label ></label>
           </header>
-          <ul className="todo-list">
-            {
-              this.state.items.map(item => (
-                <TodoItem
-                  key={item.id}
-                  onClear={this.clearItemHandler}
-                  onComplete={this.completeItemHandler}
-                  {...item} 
-                />
-              ))
-            }
-          </ul>
+          <section className="main">
+            <input 
+              id="toggle-all"
+              className="toggle-all" 
+              type="checkbox"
+              checked={todos.isTodoAll}
+              onChange={this.changeAllStatusHandler}
+            />
+            <label htmlFor="toggle-all"></label>
+            <ul className="todo-list">
+              {
+                todos.items.map(item => (
+                  <TodoItem
+                    key={item.id}
+                    onClear={this.clearItemHandler}
+                    onComplete={this.completeItemHandler}
+                    {...item} 
+                  />
+                ))
+              }
+            </ul>
+          </section>
         </section>
       </Layout>
     );
   }
 }
 
-export default Todos;
+export default connect(
+  state=> ({
+    todos: state.todos,
+  }),
+  dispatch => bindActionCreators({
+    addTodoItem,
+    clearTodoItem,
+    changeAllItem,
+    completeTodoItem,
+  }, dispatch)
+)(Todos);

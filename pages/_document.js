@@ -6,7 +6,7 @@ export default class MyDocument extends Document {
             <html>
                 <Head>
                     <title>NEXT TODO</title>
-                    <link rel="stylesheet" href="/_next/static/style.css" />
+                    <link rel="stylesheet" href="/_next/static/css/styles.chunk.css" />
                 </Head>
                 <body>
                     <Main />

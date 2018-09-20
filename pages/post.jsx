@@ -1,5 +1,6 @@
 import Layout from '../components/MyLayout.js'
 import fetch from 'isomorphic-unfetch'
+import '../static/style.scss';
 
 const Post =  (props) => (
     <Layout>

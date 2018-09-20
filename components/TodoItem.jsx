@@ -5,7 +5,8 @@ const TodoItem = (props) => {
         <input 
           className="toggle"
           type="checkbox"
-          onClick= { () => {
+          checked={ props.status === 'completed' }
+          onChange= { () => {
             props.onComplete(props.id);
           }}
         />
