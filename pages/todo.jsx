@@ -2,9 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Layout from '../components/Layout';
 
-import '../static/style.scss';
-
-
 class Todo extends React.Component {
   render() {
     const { id, todos:{ items } } = this.props;

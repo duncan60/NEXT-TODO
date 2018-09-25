@@ -2,8 +2,6 @@ import Layout from '../components/Layout';
 import Link from 'next/link';
 import fetch from 'isomorphic-unfetch';
 
-import '../static/style.scss';
-
 const Index = (props) => (
   <Layout>
     <h1>My Github Profile</h1>
@@ -23,6 +21,7 @@ const Index = (props) => (
 
 
 Index.getInitialProps = async function() {
+  console.log('Index getInitialProps');
   let profile = {};
   let repos = [];
   const res = await fetch('https://api.github.com/users/duncan60');

@@ -5,8 +5,6 @@ import Layout from '../components/Layout';
 import TodoItem from '../components/TodoItem';
 import { addTodoItem, clearTodoItem, changeAllItem, completeTodoItem } from '../store';
 
-import '../static/style.scss';
-
 class Todos extends React.Component {
   constructor(props) {
     super(props);

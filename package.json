@@ -6,7 +6,8 @@
     "scripts": {
         "dev": "node server.js",
         "build": "next build",
-        "start": "NODE_ENV=production node server.js"
+        "start": "NODE_ENV=production node server.js",
+        "start:pm2": "NODE_ENV=production pm2 start -i 2 --name next-todo-server server.js"
     },
     "repository": {
         "type": "git",
@@ -21,6 +22,7 @@
     "homepage": "https://github.com/duncan60/NEXT-TODO#readme",
     "dependencies": {
         "@zeit/next-sass": "^1.0.0",
+        "easy-monitor": "^2.2.4",
         "express": "^4.16.3",
         "isomorphic-unfetch": "^3.0.0",
         "next": "^7.0.0",
