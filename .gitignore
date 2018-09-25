@@ -55,7 +55,8 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
+# practice project, so commit .env to github
+# .env
 
 # next.js build output
 .next

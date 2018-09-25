@@ -22,6 +22,8 @@
     "homepage": "https://github.com/duncan60/NEXT-TODO#readme",
     "dependencies": {
         "@zeit/next-sass": "^1.0.0",
+        "dotenv": "^6.0.0",
+        "dotenv-webpack": "^1.5.7",
         "easy-monitor": "^2.2.4",
         "express": "^4.16.3",
         "isomorphic-unfetch": "^3.0.0",
