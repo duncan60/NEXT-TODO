@@ -10,7 +10,7 @@ const Index = (props) => (
     <ul>
       {props.repos.map((repo) => (
         <li key={repo.id}>
-          <Link as={`/p/${repo.name}`} href={`/post?name=${repo.name}`}>
+          <Link as={`/p/${repo.name}`} href={`/repo?name=${repo.name}`}>
             <a>{repo.name}</a>
           </Link>
         </li>
@@ -19,12 +19,11 @@ const Index = (props) => (
   </Layout>
 );
 
-
 Index.getInitialProps = async function() {
   console.log('Index getInitialProps');
   let profile = {};
   let repos = [];
-  const res = await fetch('https://api.github.com/users/duncan60');
+  const res = await fetch(`${process.env.GITHUB_API}/users/duncan60`);
   if (res.status === 200) {
     profile = await res.json();
   } else {
@@ -32,7 +31,7 @@ Index.getInitialProps = async function() {
       name: 'none',
     }
   }
-  const res2 = await fetch('https://api.github.com/users/duncan60/repos');
+  const res2 = await fetch(`${process.env.GITHUB_API}/users/duncan60/repos`);
   if (res2.status === 200) {
     repos = await res2.json();
   } 

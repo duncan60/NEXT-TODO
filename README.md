@@ -1,4 +1,5 @@
 # NEXT-TODO
+
 Try to development for React SSR used [NEXT.js](https://nextjs.org/) formwork
 
 ## Stacks
