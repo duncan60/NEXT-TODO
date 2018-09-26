@@ -20,9 +20,13 @@ class Todo extends React.Component {
   }
 };
 
-Todo.getInitialProps = async function (context) {
-  const { id } = context.query
-  return { id }
+Todo.getInitialProps = async function ({ query, reduxStore }) {
+  const isClientOrServer = (typeof window !== 'undefined' && window.document) ? 'client' : 'server';
+  console.log(reduxStore.getState());
+  console.log('---------');
+  console.log(`isClientOrServer: ${isClientOrServer}`);
+  const { id } = query;
+  return { id, isClientOrServer };
 }
 
 export default connect(

@@ -82,6 +82,14 @@ class Todos extends React.Component {
   }
 }
 
+Todos.getInitialProps = async function({ reduxStore }) {
+  const isClientOrServer = (typeof window !== 'undefined' && window.document) ? 'client' : 'server';
+  console.log(reduxStore.getState());
+  console.log('---------');
+  console.log(`isClientOrServer: ${isClientOrServer}`);
+  return { isClientOrServer };
+};
+
 export default connect(
   state=> ({
     todos: state.todos,

@@ -5,7 +5,7 @@ const initialState = {
   todos:{
     items: [], 
     isTodoAll: false,
-  }
+  },
 };
 
 export const actionTypes = {
