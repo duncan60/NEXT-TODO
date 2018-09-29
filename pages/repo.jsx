@@ -1,26 +1,47 @@
+import React from 'react';
 import Layout from '../components/Layout';
 import fetch from 'isomorphic-unfetch';
 
-const Repo =  (props) => (
-    <Layout>
-      <h1>{ props.repo.name }</h1>
-      <p>{ props.repo.description }</p>
-      <p>
-        github: <a href={ props.repo.html_url } target="_blank">{ props.repo.html_url }</a>
-      </p>
-    </Layout>
-)
-
-Repo.getInitialProps = async function (context) {
-  console.log('repo getInitialProps');
-  console.log(process.env);
-  let repo = {};
-  const { name } = context.query;
-  const res = await fetch(`${ process.env.GITHUB_API }/repos/duncan60/${name}`);
-  if (res.status === 200) {
-    repo = await res.json();
+class Repo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      repo: {
+        description: '',
+        html_url: '',
+      },
+     };
   }
-  return { repo }
+  async componentDidMount() {
+    fetch(`${ process.env.GITHUB_API }/repos/duncan60/${ this.props.name }`)
+      .then( r => r.json() )
+      .then( data => {
+        this.setState({
+          repo: {
+            description: data.description,
+            html_url: data.html_url,
+          }
+        });
+      });
+  }
+  render() {
+    const { name } = this.props;
+    const { repo: { description, html_url }} = this.state;
+    return (
+      <Layout>
+        <h1>{ name }</h1>
+        <p>{ description }</p>
+        <p>
+          github: <a href={ html_url } target="_blank">{ html_url }</a>
+        </p>
+      </Layout>
+    );
+  }
+}
+
+Repo.getInitialProps = function (context) {
+  console.log('repo getInitialProps');
+  return { name: context.query.name }
 }
 
 export default Repo

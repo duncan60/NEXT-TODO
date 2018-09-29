@@ -29,16 +29,23 @@ Index.getInitialProps = async function() {
   } else {
     profile = {
       name: 'none',
+      avatar_url: '',
     }
   }
   const res2 = await fetch(`${process.env.GITHUB_API}/users/duncan60/repos`);
   if (res2.status === 200) {
     repos = await res2.json();
-  } 
-
+  }
+  const filterRepos = repos.map(({ id, name }) => ({
+      id,
+      name,
+  }));
   return {
-    profile,
-    repos,
+    profile:{
+      name: profile.name,
+      avatar_url: profile.avatar_url,
+    },
+    repos: filterRepos,
   };
 };
 
