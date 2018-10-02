@@ -13,6 +13,10 @@ class Todos extends React.Component {
     };
     this.changeHandler = this.changeHandler.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
+    if (process.browser) {
+      // client-side-only code
+      console.log('client side');
+    }
   }
   changeHandler(e) {
     this.setState({ text: e.target.value });
@@ -87,6 +91,7 @@ Todos.getInitialProps = async function({ reduxStore }) {
   console.log(reduxStore.getState());
   console.log('---------');
   console.log(`isClientOrServer: ${isClientOrServer}`);
+
   return { isClientOrServer };
 };
 

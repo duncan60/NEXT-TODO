@@ -5,11 +5,11 @@ Try to development for React SSR used [NEXT.js](https://nextjs.org/) formwork
 ## Stacks
 
 - Config 管理 [dotenv](https://github.com/motdotla/dotenv)
-- 資料格式驗證 [ joi](https://github.com/hapijs/joi)
+- 資料格式驗證 [joi](https://github.com/hapijs/joi)
 - Server 監控 [easy-monitor](https://github.com/hyj1991/easy-monitor)
 - Node.js process [Pm2](https://github.com/Unitech/pm2)
 - 負載測試 [loadtest](https://github.com/alexfernandez/loadtest)
-
+- Logging [winston](https://github.com/winstonjs/winston)
 
 ### 資源
 
